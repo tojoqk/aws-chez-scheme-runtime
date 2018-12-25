@@ -8,7 +8,7 @@ TODO
 make
 ```
 
-## deploy
+## Deploy
 ```
 serverless deploy
 ```
