@@ -5,6 +5,7 @@ TODO
 
 ## Build
 ```
+git submodule update -i
 make
 ```
 
