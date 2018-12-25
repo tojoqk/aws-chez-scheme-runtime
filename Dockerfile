@@ -14,7 +14,8 @@ RUN ./configure --installprefix=./build --disable-x11 \
 WORKDIR ../
 
 RUN rm -rf ChezScheme
-COPY ./src/tojoqk-aws-custom-runtime/ ./tojoqk-aws-custom-runtime/
+COPY ./src/chez-tojoqk/ ./tojoqk-aws-custom-runtime/
+RUN sed -i 's/(tojoqk/(tojoqk-aws-custom-runtime/g' ./tojoqk-aws-custom-runtime/*.sls
 COPY ./src/bootstrap ./src/runtime.ss ./
 
 WORKDIR ../
