@@ -1,0 +1,13 @@
+#!/bin/sh
+set -euo pipefail
+
+runtime_dir=$(dirname $0)
+export CHEZSCHEMELIBDIRS=$LAMBDA_TASK_ROOT/:$runtime_dir/
+export LD_LIBRARY_PATH=$runtime_dir/lib64/:$LD_LIBRARY_PATH
+
+filename=$(echo $_HANDLER | cut -d. -f1).ss
+function=$(echo $_HANDLER | cut -d. -f2)
+
+# Initialization - load function handler
+cd $runtime_dir
+./build/bin/scheme --script $runtime_dir/runtime.ss $LAMBDA_TASK_ROOT/$filename $function ${AWS_LAMBDA_RUNTIME_API}

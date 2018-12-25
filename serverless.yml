@@ -1,0 +1,31 @@
+service: chez-scheme-runtime
+
+provider:
+  name: aws
+  runtime: provided
+  region: ap-northeast-1
+  memorySize: 128
+  timeout: 2
+
+functions:
+  chezSchemeLambdaLayerHello:
+    handler: handler.hello
+    layers:
+      - {Ref: ChezSchemeLambdaLayer}
+  chezSchemeLambdaLayerFail:
+    handler: handler.fail-test
+    layers:
+      - {Ref: ChezSchemeLambdaLayer}
+  chezSchemeLambdaLayerAssertion:
+    handler: handler.assertion-test
+    layers:
+      - {Ref: ChezSchemeLambdaLayer}
+  chezSchemeLambdaLayerRaise:
+    handler: handler.raise-test
+    layers:
+      - {Ref: ChezSchemeLambdaLayer}
+
+layers:
+  chezScheme:
+    path: layer
+    description: Chez Scheme Runtime
