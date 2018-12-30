@@ -27,11 +27,7 @@
                    "http://~a/2018-06-01/runtime/invocation/~a/response"
                    aws-lambda-rutnime-api
                    request-id)])
-            (http/post response-url
-                       (cond
-                        [(json->string response) => values]
-                        [else
-                         (format #f "~a" response)]))))
+            (http/post response-url (json->string response))))
         (loop)))))
 
 (apply runtime (cdr (command-line)))
