@@ -15,7 +15,7 @@ WORKDIR ../
 
 RUN rm -rf ChezScheme
 COPY ./src/chez-tojoqk/ ./tojoqk-aws-custom-runtime/
-RUN sed -i 's/(tojoqk/(tojoqk-aws-custom-runtime/g' ./tojoqk-aws-custom-runtime/*.sls
+RUN find ./tojoqk-aws-custom-runtime -type f -name '*.sls' | xargs sed -i 's/(tojoqk/(tojoqk-aws-custom-runtime/g' 
 COPY ./src/bootstrap ./src/runtime.ss ./
 
 WORKDIR ../
