@@ -1,8 +1,8 @@
 (import (rnrs))
 
 (define (hello event-data context)
-  `((hello . "world!!!")
-    (event-data . ,event-data)))
+  `(("hello" . "world!!!")
+    ("event-data" . ,event-data)))
 
 (define (fail-test event-data context)
   (error 'fail "failure" 'oops!))
