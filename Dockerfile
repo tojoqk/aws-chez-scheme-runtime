@@ -1,21 +1,22 @@
 From amazonlinux:2017.03.1.20170812
 
+ENV CHEZ_VERSION 9.5.2
+
 RUN mkdir layer
 WORKDIR ./layer/
-Run yum -y install libcurl-devel libuuid-devel gcc git ncurses-devel \
-  && mkdir lib64 \
-  && cp /usr/lib64/lib{curl.so,nghttp2.so.14,nss3.so} lib64/ \
-  && git clone https://github.com/cisco/ChezScheme.git
+RUN yum install -y gcc libuuid-devel ncurses-devel \
+  && curl -Lo ChezScheme-${CHEZ_VERSION}.tar.gz https://github.com/cisco/ChezScheme/archive/v${CHEZ_VERSION}.tar.gz \
+  && tar xf ChezScheme-${CHEZ_VERSION}.tar.gz
 
-WORKDIR ChezScheme
+WORKDIR ChezScheme-${CHEZ_VERSION}
 RUN ./configure --installprefix=./build --disable-x11 \
   && make && make install && mv a6le/build ..
 
 WORKDIR ../
 
-RUN rm -rf ChezScheme
-COPY ./src/chez-tojoqk/ ./tojoqk-aws-custom-runtime/
-RUN find ./tojoqk-aws-custom-runtime -type f -name '*.sls' | xargs sed -i 's/(tojoqk/(tojoqk-aws-custom-runtime/g' 
+RUN rm -rf ChezScheme-${CHEZ_VERSION}.tar.gz \
+    && rm -rf ChezScheme-${CHEZ_VERSION}
+
 COPY ./src/bootstrap ./src/runtime.ss ./
 
 WORKDIR ../

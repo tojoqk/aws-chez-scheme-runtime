@@ -1,3 +1,0 @@
-[submodule "src/chez-tojoqk"]
-	path = src/chez-tojoqk
-	url = git@github.com:tojoqk/chez-tojoqk.git

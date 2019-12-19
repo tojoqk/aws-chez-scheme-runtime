@@ -7,6 +7,10 @@ provider:
   memorySize: 128
   timeout: 2
 
+package:
+  exclude:
+    - node_modules/**
+
 functions:
   chezSchemeLambdaLayerHello:
     handler: handler.hello
