@@ -9,7 +9,9 @@ provider:
 
 package:
   exclude:
-    - node_modules/**
+    - "node_modules/**"
+    - "**/*.so"
+    - ".*/**"
 
 functions:
   chezSchemeLambdaLayerHello:
