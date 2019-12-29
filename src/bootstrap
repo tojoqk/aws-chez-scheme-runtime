@@ -4,9 +4,9 @@ set -euo pipefail
 runtime_dir=$(dirname $0)
 export CHEZSCHEMELIBDIRS=$LAMBDA_TASK_ROOT/:$runtime_dir/
 
-filename=$(echo $_HANDLER | cut -d. -f1).ss
+filename=$(echo $_HANDLER | cut -d. -f1).sps
 function=$(echo $_HANDLER | cut -d. -f2)
 
 # Initialization - load function handler
 cd $runtime_dir
-./build/bin/scheme --script $runtime_dir/runtime.ss $LAMBDA_TASK_ROOT/$filename $function ${AWS_LAMBDA_RUNTIME_API}
+./build/bin/scheme --script $runtime_dir/runtime.sps $LAMBDA_TASK_ROOT/$filename $function ${AWS_LAMBDA_RUNTIME_API}

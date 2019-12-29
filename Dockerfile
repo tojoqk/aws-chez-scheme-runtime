@@ -17,7 +17,7 @@ WORKDIR ../
 RUN rm -rf ChezScheme-${CHEZ_VERSION}.tar.gz \
     && rm -rf ChezScheme-${CHEZ_VERSION}
 
-COPY ./src/bootstrap ./src/runtime.ss ./
+COPY ./src/bootstrap ./src/runtime.sps ./
 
 WORKDIR ../
 
